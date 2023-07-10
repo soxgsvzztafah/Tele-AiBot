@@ -1,12 +1,17 @@
-FROM python:3.8-slim-buster
+# Use the official Python base image
+FROM python:3.9-slim
 
-RUN apt update && apt upgrade -y
-RUN apt install git -y
-COPY requirements.txt /requirements.txt
+# Set the working directory in the container
+WORKDIR /app
 
-RUN cd /
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN mkdir /Tele-AiBot
-WORKDIR /Tele-AiBot
-COPY start.sh /start.sh
-CMD ["/bin/bash", "/start.sh"]
+# Copy the requirements file into the container
+COPY bot/requirements.txt .
+
+# Install the Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the bot code into the container
+COPY bot/ .
+
+# Run the bot script
+CMD ["python", "bot.py"]
