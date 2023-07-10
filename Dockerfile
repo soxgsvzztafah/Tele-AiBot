@@ -5,13 +5,13 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY bot/requirements.txt .
+COPY Tele-AiBot/requirements.txt .
 
 # Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the bot code into the container
-COPY bot/ .
+COPY Tele-AiBot/ .
 
 # Run the bot script
 CMD ["python", "bot.py"]
